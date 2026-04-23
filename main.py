@@ -4,6 +4,7 @@ from player import Player
 from asteroid import Asteroid
 from asteroidfield import AsteroidField
 import pygame
+import sys
 
 def main():
     print(f"Starting Asteroids with pygame version: {pygame.version.ver}")
@@ -40,6 +41,11 @@ def main():
         # player.draw(screen)
         for updatable_item in updatable:
             updatable_item.update(dt)
+        for asteroid_item in asteroids:
+            if player.collides_with(asteroid_item):
+                log_event("player_hit")
+                print("Game over!")
+                sys.exit()
         for drawable_item in drawable:
             drawable_item.draw(screen)
 
