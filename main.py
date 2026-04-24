@@ -4,6 +4,7 @@ from player import Player
 from asteroid import Asteroid
 from asteroidfield import AsteroidField
 from shot import Shot
+from score import Score
 import pygame
 import sys
 
@@ -16,6 +17,11 @@ def main():
     screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
     clock = pygame.time.Clock()
     dt = 0
+
+    # Initialize the font
+    pygame.font.init()
+    # Initialize Score
+    score = Score()
 
     # Create groups
     updatable = pygame.sprite.Group()
@@ -54,9 +60,11 @@ def main():
                     log_event("asteroid_shot")
                     shot_item.kill()
                     asteroid_item.split()
+                    score.up_score(1)
         for drawable_item in drawable:
             drawable_item.draw(screen)
 
+        score.draw(screen)
         pygame.display.flip()
         dt = clock.tick(60) / 1000
 
