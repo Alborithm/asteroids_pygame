@@ -46,10 +46,11 @@ def main():
                 return
         screen.fill("black")
 
-        # player.update(dt)
-        # player.draw(screen)
+        # updates positions
         for updatable_item in updatable:
             updatable_item.update(dt)
+
+        # Checks for collisions with asteroids
         for asteroid_item in asteroids:
             if player.collides_with(asteroid_item):
                 log_event("player_hit")
@@ -61,6 +62,8 @@ def main():
                     shot_item.kill()
                     asteroid_item.split()
                     score.up_score(1)
+
+        # draws everything
         for drawable_item in drawable:
             drawable_item.draw(screen)
 

@@ -1,3 +1,4 @@
+IS_DEBUG = True # Used for debug flags
 SCREEN_WIDTH = 1280
 SCREEN_HEIGHT = 720
 PLAYER_RADIUS = 20

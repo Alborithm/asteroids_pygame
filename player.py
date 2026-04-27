@@ -1,6 +1,6 @@
 from circleshape import CircleShape
 from shot import Shot
-from constants import PLAYER_RADIUS, LINE_WIDTH, PLAYER_TURN_SPEED, PLAYER_SPEED, PLAYER_SHOOT_SPEED, PLAYER_SHOOT_COOLDOWN_SECONDS
+from constants import PLAYER_RADIUS, LINE_WIDTH, PLAYER_TURN_SPEED, PLAYER_SPEED, PLAYER_SHOOT_SPEED, PLAYER_SHOOT_COOLDOWN_SECONDS, IS_DEBUG
 import pygame
 
 class Player(CircleShape):
@@ -9,8 +9,9 @@ class Player(CircleShape):
         self.rotation = 0
         self.shoot_cooldown = 0
     
-    # in the Player class
+    # For drawing the player sprite
     def triangle(self):
+        # It is an isosceles triangle so you can differentiate where it it looking at
         forward = pygame.Vector2(0, 1).rotate(self.rotation)
         right = pygame.Vector2(0, 1).rotate(self.rotation + 90) * self.radius / 1.5
         a = self.position + forward * self.radius
@@ -20,6 +21,10 @@ class Player(CircleShape):
 
     def draw(self, screen):
         pygame.draw.polygon(screen, "white", self.triangle(), LINE_WIDTH)
+        # debuging
+        # Draw player collision shape which is the cirlce right now
+        if IS_DEBUG:
+            pygame.draw.circle(screen, "white", self.position, self.radius, LINE_WIDTH)
 
     def rotate(self, dt):
         self.rotation += PLAYER_TURN_SPEED * dt
