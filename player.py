@@ -55,18 +55,7 @@ class Player(CircleShape):
         self.position += rotated_with_speed_vector
 
         # check for wrap
-        # X Wrap
-        # if position x is < 0 - ship radius wraps it
-        if self.position.x < 0 - self.radius:
-            self.position.x = SCREEN_WIDTH + self.radius - 1
-        elif self.position.x > SCREEN_WIDTH + self.radius:
-            self.position.x = 0 - self.radius + 1
-            
-        # Y Wrap
-        if self.position.y < 0 - self.radius:
-            self.position.y = SCREEN_HEIGHT + self.radius - 1
-        elif self.position.y > SCREEN_HEIGHT + self.radius:
-            self.position.y = 0 - self.radius + 1
+        self.wrap_if_on_edge()
 
     def shot(self):
         new_shot = Shot(self.position.x, self.position.y)
